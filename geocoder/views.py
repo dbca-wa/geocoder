@@ -8,7 +8,6 @@ from .database import db
 bp = Blueprint("geocoder", __name__)
 LON_LAT_PATTERN = re.compile(r"(?P<lon>-?[0-9]+.[0-9]+),\s*(?P<lat>-?[0-9]+.[0-9]+)")
 ALPHANUM_PATTERN = re.compile(r"[^A-Za-z0-9\s]+")
-DATABASE = db
 
 
 @bp.get("/")
@@ -23,7 +22,7 @@ def detail(object_id):
                WHERE object_id=:object_id""")
 
     sql = sql.bindparams(object_id=object_id)
-    record = DATABASE.session.execute(sql).fetchone()
+    record = db.session.execute(sql).fetchone()
 
     if record:
         return jsonify(
@@ -74,7 +73,7 @@ def geocode():
                 FROM shack_address
                 WHERE ST_Intersects(boundary, ST_GeomFromEWKT(:ewkt))""")
             sql = sql.bindparams(ewkt=ewkt)
-            record = DATABASE.session.execute(sql).fetchone()
+            record = db.session.execute(sql).fetchone()
 
             # Serialise and return any query result.
             if record:
@@ -111,7 +110,7 @@ def geocode():
         WHERE tsv @@ to_tsquery(:tsquery)
         LIMIT :limit""")
     sql = sql.bindparams(tsquery=tsquery, limit=limit)
-    records = DATABASE.session.execute(sql).fetchall()
+    records = db.session.execute(sql).fetchall()
 
     # Serialise and return any query results.
     return jsonify(
@@ -136,7 +135,7 @@ def liveness():
 @bp.get("/readyz")
 def readiness():
     # Returns a HTTP 500 error if database connection unavailable.
-    DATABASE.session.execute(text("SELECT 1")).fetchone()
+    db.session.execute(text("SELECT 1")).fetchone()
     return "OK"
 
 
