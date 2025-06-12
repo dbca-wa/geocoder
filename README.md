@@ -56,3 +56,16 @@ To build a new Docker image from the `Dockerfile`:
 To run a Docker container locally, publishing container port 8080 to a local port:
 
     docker container run --rm --publish 8080:8080 --env-file .env ghcr.io/dbca-wa/geocoder
+
+## Pre-commit hooks
+
+This project includes the following pre-commit hooks:
+
+- TruffleHog: <https://docs.trufflesecurity.com/docs/scanning-git/precommit-hooks/>
+
+Pre-commit hooks may have additional system dependencies to run. Optionally
+install pre-commit hooks locally like so:
+
+    pre-commit install
+
+Reference: <https://pre-commit.com/>
