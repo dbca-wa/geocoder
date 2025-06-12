@@ -1,0 +1,31 @@
+[project]
+name = "geocoder"
+version = "1.0.0"
+description = "Lightweight application service to serve an API endpoint to allow full-text searching of addresses."
+authors = [{ name = "Ashley Felton", email = "ashley.felton@dbca.wa.gov.au" }]
+license = "Apache-2.0"
+requires-python = ">=3.13,<4.0"
+dependencies = [
+  "flask==3.1.1",
+  "flask-sqlalchemy==3.1.1",
+  "psycopg[binary,pool]==3.2.9",
+  "python-dotenv==1.1.0",
+]
+
+[dependency-groups]
+dev = ["ipython>=8.31.0", "ipdb>=0.13.13", "pytest>=8.4.0"]
+
+[build-system]
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
+
+# Reference: https://docs.astral.sh/ruff/configuration/
+[tool.ruff]
+line-length = 140
+indent-width = 4
+
+[tool.ruff.lint]
+ignore = [
+  "E501", # Line too long
+  "E722", # Bare except
+]
