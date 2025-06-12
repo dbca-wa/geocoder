@@ -9,6 +9,8 @@ from sqlalchemy.sql import text
 from geocoder import create_app
 from geocoder.database import db
 
+with open(os.path.join(os.path.dirname(__file__), "schema.sql"), "rb") as f:
+    _schema_sql = f.read().decode("utf8")
 with open(os.path.join(os.path.dirname(__file__), "data.sql"), "rb") as f:
     _data_sql = f.read().decode("utf8")
 
@@ -52,9 +54,10 @@ def app(db_url):
     app = create_app(test_config)
 
     with app.app_context():
+        # Set up the database table.
+        db.session.execute(text(_schema_sql))
         # Install the test fixture data.
-        sql = text(_data_sql)
-        db.session.execute(sql)
+        db.session.execute(text(_data_sql))
 
         yield app
 

@@ -23,6 +23,10 @@ def test_detail(test_client):
 
 
 def test_geocode_q(test_client):
+    response = test_client.get("/api/geocode", query_string={"q": "smith"})
+    assert response.status_code == 200
+    assert response.headers["Content-Type"] == "application/json"
+    assert b"JOHN SMITH" in response.data
     response = test_client.get("/api/geocode", query_string={"q": "springfield"})
     assert response.status_code == 200
     assert response.headers["Content-Type"] == "application/json"
