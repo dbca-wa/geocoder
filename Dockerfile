@@ -57,8 +57,8 @@ ENV PYTHONUNBUFFERED=1
 
 # Install the project.
 WORKDIR /app
-COPY gunicorn.py ./
 COPY geocoder ./geocoder
+COPY gunicorn.py entrypoint.sh ./
 USER app
 EXPOSE 8080
-CMD ["gunicorn", "'geocoder:create_app()'", "--config", "gunicorn.py"]
+ENTRYPOINT ["/bin/bash", "entrypoint.sh"]
