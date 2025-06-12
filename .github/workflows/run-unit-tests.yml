@@ -1,0 +1,60 @@
+name: 'Run unit tests'
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  run_tests:
+    name: Run Django Tests
+    runs-on: ubuntu-latest
+    env:
+      DATABASE_URL: postgresql+psycopg://postgres:postgres@localhost:5432/postgres
+      LOCAL_MEDIA_STORAGE: true
+    services:
+      postgres:
+        image: postgis/postgis:15-3.5-alpine
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+        ports:
+          - 5432:5432
+        options: --mount type=tmpfs,destination=/var/lib/postgresql/data --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+    steps:
+      #----------------------------------------------
+      # Install GDAL into the environment
+      #----------------------------------------------
+      - name: Install GDAL
+        id: install-gdal
+        run: |
+          sudo apt-add-repository --yes ppa:ubuntugis/ubuntugis-unstable
+          sudo apt-get update
+          sudo apt-get install --no-install-recommends --yes gdal-bin libgdal-dev
+      #----------------------------------------------
+      # Checkout repo
+      #----------------------------------------------
+      - name: Checkout repo
+        uses: actions/checkout@main
+        id: checkout-repo
+        with:
+          fetch-depth: 0
+      #----------------------------------------------
+      # Install & configure uv
+      #----------------------------------------------
+      - name: Install the latest version of uv
+        uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+      #----------------------------------------------
+      # Install project dependencies
+      #----------------------------------------------
+      - name: Install dependencies
+        run: uv sync
+      #----------------------------------------------
+      # Run unit tests
+      #----------------------------------------------
+      - name: Run tests
+        run: uv run pytest --dburl $DATABASE_URL
