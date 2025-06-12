@@ -1,0 +1,7 @@
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: geocoder-deployment-hpa
+spec:
+  scaleTargetRef:
+    name: geocoder-deployment-uat

@@ -1,0 +1,15 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: geocoder-deployment
+spec:
+  template:
+    spec:
+      containers:
+        - name: geocoder
+          env:
+            - name: DATABASE_URI
+              valueFrom:
+                secretKeyRef:
+                  name: geocoder-env-uat
+                  key: DATABASE_URI

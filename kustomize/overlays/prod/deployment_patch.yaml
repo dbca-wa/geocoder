@@ -1,0 +1,16 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: geocoder-deployment
+spec:
+  template:
+    spec:
+      containers:
+        - name: geocoder
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: DATABASE_URI
+              valueFrom:
+                secretKeyRef:
+                  name: geocoder-env-prod
+                  key: DATABASE_URI

@@ -30,6 +30,9 @@ Manage new or updated project dependencies with uv also, like so:
 ## Environment variables
 
 This project uses **python-dotenv** to set environment variables (in a `.env` file).
+The following variables are required:
+
+    DATABASE_URI
 
 ## Usage
 
