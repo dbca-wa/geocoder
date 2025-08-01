@@ -13,3 +13,8 @@ spec:
                 secretKeyRef:
                   name: geocoder-env-uat
                   key: DATABASE_URI
+      tolerations:
+        - effect: NoSchedule
+          key: kubernetes.azure.com/scalesetpriority
+          operator: Equal
+          value: spot
