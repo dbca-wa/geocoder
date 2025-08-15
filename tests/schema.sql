@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS shack_address (
-    id integer NOT NULL PRIMARY KEY,
+    id SERIAL NOT NULL PRIMARY KEY,
     object_id character varying(64) NOT NULL UNIQUE,
     address_text text NOT NULL,
     address_nice text,

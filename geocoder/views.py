@@ -20,7 +20,6 @@ def detail(object_id):
     sql = text("""SELECT object_id, address_nice, owner, ST_AsText(centroid), ST_AsText(envelope), ST_AsText(boundary), data
                FROM shack_address
                WHERE object_id=:object_id""")
-
     sql = sql.bindparams(object_id=object_id)
     record = db.session.execute(sql).fetchone()
 
