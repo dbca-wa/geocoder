@@ -9,7 +9,7 @@ on:
 
 jobs:
   run_tests:
-    name: Run Django Tests
+    name: Run unit tests
     runs-on: ubuntu-latest
     env:
       DATABASE_URL: postgresql+psycopg://postgres:postgres@localhost:5432/postgres
@@ -33,6 +33,13 @@ jobs:
           sudo apt-add-repository --yes ppa:ubuntugis/ubuntugis-unstable
           sudo apt-get update
           sudo apt-get install --no-install-recommends --yes gdal-bin libgdal-dev
+      #----------------------------------------------
+      # Make use of the Step Security Harden Runner workflow action
+      #----------------------------------------------
+      - name: Harden the GitHub runner
+        uses: step-security/harden-runner@v2.13.1
+        with:
+          egress-policy: audit
       #----------------------------------------------
       # Checkout repo
       #----------------------------------------------
