@@ -1,4 +1,4 @@
-# Caddy Kubernetes Kustomize overlay configuration
+# Geocoder Kubernetes Kustomize overlay configuration
 
 Declarative management of Geocoder Kubernetes objects using Kustomize.
 
