@@ -15,3 +15,13 @@ spec:
                 name: geocoder-clusterip-uat
                 port:
                   number: 8080
+    - host: geocoder-uat.dbca.wa.gov.au
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: geocoder-clusterip-uat
+                port:
+                  number: 8080

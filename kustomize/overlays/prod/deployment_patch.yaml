@@ -8,9 +8,6 @@ spec:
       containers:
         - name: geocoder
           imagePullPolicy: IfNotPresent
-          env:
-            - name: DATABASE_URI
-              valueFrom:
-                secretKeyRef:
-                  name: geocoder-env-prod
-                  key: DATABASE_URI
+          envFrom:
+            - secretRef:
+                name: geocoder-env-prod

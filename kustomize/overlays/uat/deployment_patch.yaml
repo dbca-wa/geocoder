@@ -7,9 +7,6 @@ spec:
     spec:
       containers:
         - name: geocoder
-          env:
-            - name: DATABASE_URI
-              valueFrom:
-                secretKeyRef:
-                  name: geocoder-env-uat
-                  key: DATABASE_URI
+          envFrom:
+            - secretRef:
+                name: geocoder-env-uat
