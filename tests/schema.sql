@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS shack_address (
     owner text,
     boundary geometry(Polygon,4326)
 );
-CREATE FUNCTION shack_address_search_trigger() RETURNS trigger AS $$
+CREATE OR REPLACE FUNCTION shack_address_search_trigger() RETURNS trigger AS $$
 begin
   new.tsv :=
     setweight(to_tsvector(coalesce(new.data->>'road_name','')), 'A') ||
@@ -22,4 +22,4 @@ begin
   return new;
 end
 $$ LANGUAGE plpgsql;
-CREATE TRIGGER shack_address_tsv_update BEFORE INSERT OR UPDATE ON shack_address FOR EACH ROW EXECUTE FUNCTION shack_address_search_trigger();
+CREATE OR REPLACE TRIGGER shack_address_tsv_update BEFORE INSERT OR UPDATE ON shack_address FOR EACH ROW EXECUTE FUNCTION shack_address_search_trigger();
