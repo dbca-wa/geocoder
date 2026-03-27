@@ -14,7 +14,7 @@ ENV UV_LINK_MODE=copy \
   UV_PYTHON_DOWNLOADS=never \
   UV_PROJECT_ENVIRONMENT=/app/.venv
 
-COPY --from=ghcr.io/astral-sh/uv:0.9 /uv /uvx /bin/
+COPY --from=ghcr.io/astral-sh/uv:0.11 /uv /bin/
 
 # Since there's no point in shipping lock files, we move them
 # into a directory that is NOT copied into the runtime image.
@@ -42,7 +42,7 @@ LABEL org.opencontainers.image.source=https://github.com/dbca-wa/geocoder
 # Install OS packages
 RUN apt-get update -y \
   && apt-get upgrade -y \
-  && apt-get install -y gdal-bin proj-bin \
+  && apt-get install -y gdal-bin proj-bin gcc g++ \
   && rm -rf /var/lib/apt/lists/*
 
 # Create a non-root user.
