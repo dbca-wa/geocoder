@@ -4,14 +4,8 @@ Minimal Flask WSGI application to provide an API for geocoding cadastre data.
 
 ## Installation
 
-The recommended way to set up this project for development is using
-[uv](https://docs.astral.sh/uv/)
-to install and manage a Python virtual environment.
-With uv installed, install the required Python version (see `pyproject.toml`). Example:
-
-    uv python install 3.13
-
-Change into the project directory and run:
+Dependencies for this project are managed using [uv](https://docs.astral.sh/uv/).
+With uv installed, change into the project directory and run:
 
     uv sync
 
