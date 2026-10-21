@@ -20,6 +20,7 @@ dev = [
   "mixer>=7.2.2",
   "pre-commit>=4.7.0",
   "deptry>=0.25.1",
+  "pytest>=9.1.1",
 ]
 
 [build-system]
