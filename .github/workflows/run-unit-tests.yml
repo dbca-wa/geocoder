@@ -14,7 +14,7 @@ jobs:
     name: Run unit tests
     runs-on: ubuntu-latest
     env:
-      DATABASE_URL: postgis://postgres:postgres@localhost:5432/postgres
+      DATABASE_URL: postgresql+psycopg://postgres:postgres@localhost:5432/postgres
     permissions:
       contents: read
     services:
