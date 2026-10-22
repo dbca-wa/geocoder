@@ -12,6 +12,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: geocoder-clusterip-prod
+                name: geocoder-webserver-prod
                 port:
                   number: 8080

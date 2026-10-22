@@ -12,6 +12,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: geocoder-clusterip-uat
+                name: geocoder-webserver-uat
                 port:
                   number: 8080

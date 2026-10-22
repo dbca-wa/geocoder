@@ -1,12 +1,13 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: geocoder-deployment
+  name: geocoder-webserver
 spec:
   template:
     spec:
       containers:
         - name: geocoder
+          imagePullPolicy: IfNotPresent
           envFrom:
             - secretRef:
-                name: geocoder-env-uat
+                name: geocoder-env-prod
