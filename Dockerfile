@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-FROM dhi.io/python:3.13-debian13-dev AS build-stage
+FROM dhi.io/python:3.15-debian13-dev AS build-stage
 LABEL org.opencontainers.image.title="Cadastre Geocoder" \
   org.opencontainers.image.description="DBCA cadastre geocoding service" \
   org.opencontainers.image.source="https://github.com/dbca-wa/geocoder" \
