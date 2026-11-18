@@ -48,11 +48,11 @@ Set up a test database (if required), and run unit tests using `pytest`:
 
 To build a new Docker image from the `Dockerfile`:
 
-    docker image build -t ghcr.io/dbca-wa/geocoder .
+    docker buildx bake local
 
 To run a Docker container locally, publishing container port 8080 to a local port:
 
-    docker container run --rm --publish 8080:8080 --env-file .env ghcr.io/dbca-wa/geocoder
+    docker container run --rm --publish 8080:8080 --env-file .env ghcr.io/dbca-wa/geocoder:dev
 
 ## Pre-commit hooks
 
